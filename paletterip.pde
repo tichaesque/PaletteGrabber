@@ -8,15 +8,42 @@ int iheight;
 float tolerance = 50.0;
 int totalCount = 0; 
 float proptolerance = 0.005;
-String filename = "loish2";
+String filename = "jundi1";
 
-float colorDist(color c1, color c2)
-{
+float colorDist(color c1, color c2) {
   float r = red(c1) - red(c2);
   float g = green(c1) - green(c2);
   float b = blue(c1) - blue(c2);
   
   return sqrt(sq(r) + sq(g) + sq(b));
+}
+
+void sortColors() {
+  colorMode(HSB);
+  
+  boolean swapped = true;
+  int j = 0;
+  while(swapped) {
+    swapped = false;
+    j++;
+    for(int idx = 0; idx < colors.size()-j; idx++) {
+      color currColor = colors.get(idx).pixelcolor;
+      color nextColor = colors.get(idx+1).pixelcolor;
+      color currCount = colors.get(idx).count;
+      color nextCount = colors.get(idx+1).count;
+      
+     if(hue(currColor) > hue(nextColor)) {
+       colors.get(idx+1).pixelcolor = currColor;
+       colors.get(idx+1).count = currCount;
+       
+       colors.get(idx).pixelcolor = nextColor;
+       colors.get(idx).count = nextCount;
+       
+       swapped = true;
+     }
+    }
+  }
+  
 }
 
 void addPixel(color currpix) {
@@ -97,7 +124,7 @@ void setup() {
   
   float xpos = 0f;
   color prevColor= colors.get(0).pixelcolor;
-  
+  sortColors();
   for(int idx = 0; idx < colors.size(); idx++) { 
     float prop = colors.get(idx).count / ((float)netCount);
     float rwidth = width*prop;
