@@ -8,7 +8,7 @@ int iheight;
 float tolerance = 50.0;
 int totalCount = 0; 
 float proptolerance = 0.005;
-String filename = "jundi1";
+String filename = "zemotion2";
 
 float colorDist(color c1, color c2) {
   float r = red(c1) - red(c2);
@@ -19,7 +19,6 @@ float colorDist(color c1, color c2) {
 }
 
 void sortColors() {
-  colorMode(HSB);
   
   boolean swapped = true;
   int j = 0;
@@ -43,6 +42,7 @@ void sortColors() {
      }
     }
   }
+  
   
 }
 
